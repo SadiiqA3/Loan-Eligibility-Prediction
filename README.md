@@ -75,12 +75,7 @@ The application uses applicant information such as;
 These features are processed by the Flask backend before being passed to the trained model.
 
 SCREENSHOT
-
-A screenshot of the application interface can be added here:
-
-```text
-Coming soon
-```
+![Loan Eligibility Prediction System](App/Static/loan-prediction-preview.png)
 
 INSTALLATION AND SETUP
  1. Clone the repository
