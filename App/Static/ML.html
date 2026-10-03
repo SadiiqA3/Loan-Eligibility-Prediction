@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loan Eligibility Assessment</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+
+        background-image:
+          linear-gradient(rgba(23, 32, 51, 0.68), rgba(23, 32, 51, 0.68)),
+          url("/static/background.jpg");
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .container {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 14px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+        max-width: 800px;
+        width: 100%;
+      }
+
+      h2 {
+        text-align: center;
+        font-size: 32px;
+        color: #172033;
+        margin: 0 0 32px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+      }
+
+      form {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        font-size: 15px;
+        color: #334155;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 13px 14px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        font-family: "Inter", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        background-color: #ffffff;
+        color: #172033;
+        outline: none;
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+      input:hover,
+      select:hover {
+        border-color: #94a3b8;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+      }
+
+      button {
+        background-color: #1d4ed8;
+        color: #ffffff;
+        padding: 14px 26px;
+        border: none;
+        border-radius: 8px;
+        font-family: "Inter", sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          background-color 0.2s ease,
+          transform 0.1s ease;
+        margin-top: 8px;
+        min-width: 210px;
+      }
+
+      button:hover {
+        background-color: #1e40af;
+      }
+
+      button:active {
+        transform: translateY(1px);
+      }
+
+      .full-width {
+        grid-column: 1 / -1;
+        text-align: center;
+      }
+
+      .result-box {
+        margin-top: 20px;
+        padding: 14px 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1.05rem;
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      .result-success {
+        background-color: #f0fdf4;
+        color: #15803d;
+        border: 1px solid #bbf7d0;
+      }
+
+      .result-fail {
+        background-color: #fef2f2;
+        color: #b91c1c;
+        border: 1px solid #fecaca;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-5px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>LOAN ELIGIBILITY ASSESSMENT</h2>
+      <form id="loanForm">
+        <div>
+          <label for="Gender">Gender</label>
+          <select id="Gender">
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+        <div>
+          <label for="Married">Married</label>
+          <select id="Married">
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+        <div>
+          <label for="Education">Education</label>
+          <select id="Education">
+            <option>Graduate</option>
+            <option>Not Graduate</option>
+          </select>
+        </div>
+        <div>
+          <label for="Self_Employed">Self Employed</label>
+          <select id="Self_Employed">
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+        <div>
+          <label for="ApplicantIncome">Applicant Income</label>
+          <input
+            type="text"
+            id="ApplicantIncome"
+            inputmode="numeric"
+            placeholder="e.g. 5,000"
+          />
+        </div>
+        <div>
+          <label for="CoapplicantIncome">Co-applicant Income</label>
+          <input
+            type="text"
+            id="CoapplicantIncome"
+            inputmode="numeric"
+            placeholder="e.g. 2,000"
+          />
+        </div>
+        <div>
+          <label for="LoanAmount">Loan Amount</label>
+          <input
+            type="text"
+            id="LoanAmount"
+            inputmode="numeric"
+            placeholder="e.g. 150,000"
+          />
+        </div>
+        <div>
+          <label for="Loan_Amount_Term">Loan Term (Days)</label>
+          <input type="number" id="Loan_Amount_Term" />
+        </div>
+        <div>
+          <label for="Dependents">Dependents</label>
+          <select id="Dependents">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3+</option>
+          </select>
+        </div>
+        <div>
+          <label for="Credit_History">Credit History</label>
+          <select id="Credit_History">
+            <option value="1">Good (1)</option>
+            <option value="0">Bad (0)</option>
+          </select>
+        </div>
+        <div class="full-width">
+          <button type="submit">Check Eligibility</button>
+        </div>
+        <div id="result" class="full-width"></div>
+      </form>
+    </div>
+
+    <script>
+      function formatNumberInput(input) {
+        let value = input.value.replace(/,/g, "");
+
+        if (value === "") return;
+
+        if (!isNaN(value)) {
+          input.value = Number(value).toLocaleString("en-US");
+        }
+      }
+
+      document
+        .getElementById("ApplicantIncome")
+        .addEventListener("input", function () {
+          formatNumberInput(this);
+        });
+
+      document
+        .getElementById("CoapplicantIncome")
+        .addEventListener("input", function () {
+          formatNumberInput(this);
+        });
+
+      document
+        .getElementById("LoanAmount")
+        .addEventListener("input", function () {
+          formatNumberInput(this);
+        });
+
+      document
+        .getElementById("loanForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const formData = {
+            Gender: document.getElementById("Gender").value,
+            Married: document.getElementById("Married").value,
+            Education: document.getElementById("Education").value,
+            Self_Employed: document.getElementById("Self_Employed").value,
+            ApplicantIncome: document
+              .getElementById("ApplicantIncome")
+              .value.replace(/,/g, ""),
+
+            CoapplicantIncome: document
+              .getElementById("CoapplicantIncome")
+              .value.replace(/,/g, ""),
+
+            LoanAmount: document
+              .getElementById("LoanAmount")
+              .value.replace(/,/g, ""),
+            Loan_Amount_Term: document.getElementById("Loan_Amount_Term").value,
+            Credit_History: document.getElementById("Credit_History").value,
+            Dependents: document.getElementById("Dependents").value,
+          };
+
+          try {
+            const res = await fetch("http://127.0.0.1:5000/predict", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(formData),
+            });
+
+            const result = await res.json();
+            const output = document.getElementById("result");
+
+            if (result.prediction === "Approved") {
+              output.innerHTML = `<div class="result-box result-success">✅ Loan Approved! 🎉</div>`;
+            } else {
+              output.innerHTML = `<div class="result-box result-fail">❌ Loan Rejected 😞</div>`;
+            }
+          } catch (error) {
+            document.getElementById("result").innerHTML =
+              `<div class="result-box result-fail">Error: ${error.message}</div>`;
+            console.error("Prediction error:", error);
+          }
+        });
+    </script>
+  </body>
+</html>
